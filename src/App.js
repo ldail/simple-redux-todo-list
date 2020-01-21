@@ -1,11 +1,10 @@
 import React from 'react';
 import './App.css';
 import {connect} from 'react-redux'
-import {changeCompleted} from './redux/tasks/task-actions'
+import {changeCompleted, deleteTask} from './redux/tasks/task-actions'
 
 function App(props) {
-  const {tasks, changeCompleted} = props
-  console.log(tasks);
+  const {tasks, changeCompleted, deleteTask} = props
   return (
     <div className="App">
       <h1>Todo list</h1>
@@ -15,7 +14,7 @@ function App(props) {
         {tasks.filter(task => task.completed === false).map((task, index) => {
           return <li key={task.id}>
               <input type="checkbox" value={index} onClick={() => changeCompleted(task.id)} />Task #{index+1}: {task.task}
-              <button type="button"><span role="img" aria-label="delete">&#x274C;</span></button>
+              <button type="button" onClick={() => deleteTask(task.id)}><span role="img" aria-label="delete">&#x274C;</span></button>
 
             </li>
         })}
@@ -26,7 +25,7 @@ function App(props) {
       {tasks.filter(task => task.completed === true).map((task, index) => {
           return <li key={task.id}>
               <input type="checkbox" value={index} onClick={() => changeCompleted(task.id)} />Task #{index+1}: {task.task} 
-              <button type="button"><span role="img" aria-label="delete">&#x274C;</span></button>
+              <button type="button" onClick={() => deleteTask(task.id)}><span role="img" aria-label="delete">&#x274C;</span></button>
             </li>
         })}
       </ul>
@@ -42,7 +41,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  changeCompleted: (id) => dispatch(changeCompleted(id))
+  changeCompleted: (id) => dispatch(changeCompleted(id)),
+  deleteTask: (id) => dispatch(deleteTask(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

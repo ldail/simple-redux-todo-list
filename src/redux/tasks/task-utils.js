@@ -10,7 +10,8 @@ export const changeCompleted = (state, payload) => {
 
 
 export const deleteTask = (state, payload) => {
-  // let {tasks} = state;
-  // let found = tasks.
+  let {tasks} = state;
+  let newTasks = tasks.map(task => task).filter(task => task.id !== payload);
+  return newTasks;
 
 }

@@ -10,11 +10,10 @@ const taskReducer = (state=INITIAL_STATE, action) => {
       return {
         tasks: newState
       }
-    case 'DELETE':
+    case 'DELETE_TASK':
       let afterDeletedState = deleteTask(state, action.payload)
       return {
-        ...state,
-        ...afterDeletedState
+        tasks: afterDeletedState
       }
     default:
       return state
