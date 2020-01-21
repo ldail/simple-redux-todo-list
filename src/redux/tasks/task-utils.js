@@ -1,22 +1,16 @@
-export const moveToCompleted = (state, payload) => {
-  console.log(state);
+export const changeCompleted = (state, payload) => {
   let {tasks} = state;
-  let found = tasks.remainingTasks.find(task => task.id === payload);
-  let remaining = tasks.remainingTasks.filter(task => task.id !== payload);
-
-  tasks.completedTasks.push(found);
-  tasks.remainingTasks = remaining;
-  return tasks;
-
-
+  console.log(tasks);
+  let newTasks = tasks.map(item => item)
+  let found = newTasks.find(task => task.id === payload);
+  found.completed = !found.completed
+  console.log(newTasks);
+  return newTasks;
 }
 
-export const moveToRemaining = (state, payload) => {
-  let {tasks} = state;
-  let found = tasks.completedTasks.find(task => task.id === payload);
-  let remaining = tasks.completedTasks.filter(task => task.id !== payload);
 
-  tasks.remainingTasks.push(found);
-  tasks.completedTasks = remaining;
-  return tasks;
+export const deleteTask = (state, payload) => {
+  // let {tasks} = state;
+  // let found = tasks.
+
 }

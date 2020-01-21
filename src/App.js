@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
 import {connect} from 'react-redux'
-import {moveToRemaining, moveToCompleted} from './redux/tasks/task-actions'
+import {changeCompleted} from './redux/tasks/task-actions'
 
 function App(props) {
-  const {tasks, moveToCompleted, moveToRemaining} = props
+  const {tasks, changeCompleted} = props
   console.log(tasks);
   return (
     <div className="App">
@@ -12,15 +12,22 @@ function App(props) {
 
       <h2>Tasks to do:</h2>
       <ul className="tasksRemaining">
-        {tasks.remainingTasks.map((task, index) => {
-          return <li key={task.id}><input type="checkbox" value={index} onClick={() => moveToCompleted(task.id)} />Task #{index+1}: {task.task}</li>
+        {tasks.filter(task => task.completed === false).map((task, index) => {
+          return <li key={task.id}>
+              <input type="checkbox" value={index} onClick={() => changeCompleted(task.id)} />Task #{index+1}: {task.task}
+              <button type="button"><span role="img" aria-label="delete">&#x274C;</span></button>
+
+            </li>
         })}
       </ul>
 
-      <h2>Tasks to do:</h2>
+      <h2>Tasks finished:</h2>
       <ul className="tasksFinished">
-      {tasks.completedTasks.map((task, index) => {
-          return <li key={task.id}><input type="checkbox" value={index} onClick={() => moveToRemaining(task.id)} />Task #{index+1}: {task.task}</li>
+      {tasks.filter(task => task.completed === true).map((task, index) => {
+          return <li key={task.id}>
+              <input type="checkbox" value={index} onClick={() => changeCompleted(task.id)} />Task #{index+1}: {task.task} 
+              <button type="button"><span role="img" aria-label="delete">&#x274C;</span></button>
+            </li>
         })}
       </ul>
 
@@ -35,8 +42,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  moveToCompleted: (id) => dispatch(moveToCompleted(id)),
-  moveToRemaining: (id) => dispatch(moveToRemaining(id))
+  changeCompleted: (id) => dispatch(changeCompleted(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

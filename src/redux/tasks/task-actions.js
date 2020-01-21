@@ -1,10 +1,9 @@
-export const moveToCompleted = (id) => ({
-  type: 'MOVE_TO_COMPLETED',
+export const changeCompleted = (id) => ({
+  type: 'CHANGE_COMPLETED',
   payload: id
-
 })
 
-export const moveToRemaining = (id) => ({
-  type: 'MOVE_TO_REMAINING',
+export const deleteTask = (id) => ({
+  type: 'DELETE_TASK',
   payload: id
 })
