@@ -4,10 +4,14 @@ import {connect} from 'react-redux'
 import {changeCompleted, deleteTask} from './redux/tasks/task-actions'
 
 function App(props) {
-  const {tasks, changeCompleted, deleteTask} = props
+  const {tasks, changeCompleted, deleteTask, addTask} = props
   return (
     <div className="App">
       <h1>Todo list</h1>
+
+      <label htmlFor="addTaskInput">Add a task: </label>
+      <input type="text" id="addTaskInput" name="addTaskInput" />
+      <button type="button" onClick={() => addTask(document.querySelector('#addTaskInput').value)}>Add task</button>
 
       <h2>Tasks to do:</h2>
       <ul className="tasksRemaining">
@@ -42,7 +46,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   changeCompleted: (id) => dispatch(changeCompleted(id)),
-  deleteTask: (id) => dispatch(deleteTask(id))
+  deleteTask: (id) => dispatch(deleteTask(id)),
+  addTask: (id) => dispatch(addTask(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
