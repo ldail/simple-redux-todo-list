@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import {connect} from 'react-redux'
-import {changeCompleted, deleteTask} from './redux/tasks/task-actions'
+import {changeCompleted, deleteTask, addTask} from './redux/tasks/task-actions'
 
 function App(props) {
   const {tasks, changeCompleted, deleteTask, addTask} = props
@@ -47,7 +47,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   changeCompleted: (id) => dispatch(changeCompleted(id)),
   deleteTask: (id) => dispatch(deleteTask(id)),
-  addTask: (id) => dispatch(addTask(id))
+  addTask: (task) => dispatch(addTask(task))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
