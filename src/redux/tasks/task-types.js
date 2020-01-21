@@ -1,0 +1,4 @@
+export const TaskTypes = ({
+  MOVE_TO_COMPLETED: 'MOVE_TO_COMPLETED',
+  MOVE_TO_REMAINING: 'MOVE_TO_REMAINING'
+})
