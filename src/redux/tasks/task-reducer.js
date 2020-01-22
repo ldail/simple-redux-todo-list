@@ -1,5 +1,5 @@
 import tasks from '../../tasks';
-import {changeCompleted, deleteTask, addTask} from './task-utils';
+import {changeCompleted, deleteTask, addTask, editTask} from './task-utils';
 
 const INITIAL_STATE = {tasks}
 
@@ -19,6 +19,11 @@ const taskReducer = (state=INITIAL_STATE, action) => {
       let afterAddTaskState = addTask(state, action.payload);
       return {
         tasks: afterAddTaskState
+      }
+    case 'EDIT_TASK':
+      let afterEditTaskState = editTask(state, action.payload);
+      return {
+        tasks: afterEditTaskState
       }
     default:
       return state

@@ -25,3 +25,11 @@ export const addTask = (state, payload) => {
   newTasks.push(newTask);
   return newTasks;
 }
+
+export const editTask = (state, payload) => {
+  let {tasks} = state;
+  let newTasks = tasks.map(task => task);
+  let found = newTasks.findIndex(task => task.id === payload.id);
+  newTasks[found] = {id: payload.id, task: payload.task, completed: payload.completed}
+  return newTasks;
+}

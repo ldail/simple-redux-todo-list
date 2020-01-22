@@ -12,3 +12,8 @@ export const addTask = (id) => ({
   type: 'ADD_TASK',
   payload: id
 })
+
+export const editTask = (id, task, completed) => ({
+  type: 'EDIT_TASK',
+  payload: {id, task, completed}
+})
