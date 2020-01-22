@@ -26,50 +26,58 @@ class App extends React.Component {
     <div className="App">
       <h1>Todo list</h1>
 
-      <label htmlFor="addTaskInput">Add a task: </label>
-      <input type="text" id="addTaskInput" name="addTaskInput" />
-      <button type="button" onClick={() => addTask(document.querySelector('#addTaskInput').value)}>Add task</button>
+      <section className="addTask">
+        <label htmlFor="addTaskInput">Add a task: </label>
+        <input type="text" id="addTaskInput" name="addTaskInput" />
+        <button type="button" onClick={() => addTask(document.querySelector('#addTaskInput').value)}>Add task</button>
+      </section>
 
+      <section className="taskLists">
+        <div className="taskList">
       <h2>Tasks to do:</h2>
-      <ul className="tasksRemaining">
-        {tasks.filter(task => task.completed === false).map((task, index) => {
-          return <li key={task.id} id={task.id}>
-              <input type="checkbox" value={index} onClick={() => changeCompleted(task.id)} />Task #{index+1}: {task.task}
+        <ul>
+          {tasks.filter(task => task.completed === false).map((task, index) => {
+            return <li key={task.id} id={task.id}>
+                <input type="checkbox" value={index} onClick={() => changeCompleted(task.id)} />Task #{index+1}: {task.task}
 
-              <input type="text" className="editBox" value={this.state.editValue} onChange={(e) => this.setState({editValue: e.target.value})} />
-              <button type="button" className="editButton" onClick={() => {
-                this.setState({activeEditId: '', editValue: ''})
-                document.querySelector(`[id='${task.id}'] > .editBox`).style.display = "none";
-                document.querySelector(`[id='${task.id}'] > .editButton`).style.display = "none";
-                editTask(task.id, this.state.editValue, task.completed);
-              }}>Change task</button>
+                <input type="text" className="editBox" value={this.state.editValue} onChange={(e) => this.setState({editValue: e.target.value})} />
+                <button type="button" className="editButton" onClick={() => {
+                  this.setState({activeEditId: '', editValue: ''})
+                  document.querySelector(`[id='${task.id}'] > .editBox`).style.display = "none";
+                  document.querySelector(`[id='${task.id}'] > .editButton`).style.display = "none";
+                  editTask(task.id, this.state.editValue, task.completed);
+                }}>Change task</button>
 
-              <button type="button" onClick={() => deleteTask(task.id)}><span role="img" aria-label="delete">&#x274C;</span></button>
-              <button type="button" onClick={() => this.handleEdit(task.id, task.task)}><span role="img" aria-label="edit">&#10847;</span></button>
+                <button type="button" onClick={() => deleteTask(task.id)}><span role="img" aria-label="delete">&#x274C;</span></button>
+                <button type="button" onClick={() => this.handleEdit(task.id, task.task)}><span role="img" aria-label="edit">&#10847;</span></button>
 
-            </li>
-        })}
-      </ul>
+              </li>
+          })}
+        </ul>
+        </div>
 
-      <h2>Tasks finished:</h2>
-      <ul className="tasksFinished">
-      {tasks.filter(task => task.completed === true).map((task, index) => {
-          return <li key={task.id} id={task.id}>
-              <input type="checkbox" value={index} onClick={() => changeCompleted(task.id)} />Task #{index+1}: {task.task} 
+        <div className="taskList">
+        <h2>Tasks finished:</h2>
+        <ul>
+        {tasks.filter(task => task.completed === true).map((task, index) => {
+            return <li key={task.id} id={task.id}>
+                <input type="checkbox" value={index} onClick={() => changeCompleted(task.id)} />Task #{index+1}: {task.task} 
 
-              <input type="text" className="editBox" value={this.state.editValue} onChange={(e) => this.setState({editValue: e.target.value})} />
-              <button type="button" className="editButton" onClick={() => {
-                this.setState({activeEditId: '', editValue: ''})
-                document.querySelector(`[id='${task.id}'] > .editBox`).style.display = "none";
-                document.querySelector(`[id='${task.id}'] > .editButton`).style.display = "none";
-                editTask(task.id, this.state.editValue, task.completed);
-              }}>Change task</button>
+                <input type="text" className="editBox" value={this.state.editValue} onChange={(e) => this.setState({editValue: e.target.value})} />
+                <button type="button" className="editButton" onClick={() => {
+                  this.setState({activeEditId: '', editValue: ''})
+                  document.querySelector(`[id='${task.id}'] > .editBox`).style.display = "none";
+                  document.querySelector(`[id='${task.id}'] > .editButton`).style.display = "none";
+                  editTask(task.id, this.state.editValue, task.completed);
+                }}>Change task</button>
 
-              <button type="button" onClick={() => deleteTask(task.id)}><span role="img" aria-label="delete">&#x274C;</span></button>
-              <button type="button" onClick={() => this.handleEdit(task.id, task.task)}><span role="img" aria-label="edit">&#10847;</span></button>
-            </li>
-        })}
-      </ul>
+                <button type="button" onClick={() => deleteTask(task.id)}><span role="img" aria-label="delete">&#x274C;</span></button>
+                <button type="button" onClick={() => this.handleEdit(task.id, task.task)}><span role="img" aria-label="edit">&#10847;</span></button>
+              </li>
+          })}
+        </ul>
+        </div>
+      </section>
 
     </div>
   );
