@@ -33,6 +33,11 @@ input[type='checkbox'] {
   background-color: black;
 }
 
+.loading { 
+  color: red;
+  font-weight: bold;
+}
+
 @media screen and (min-width: 768px) {
   .taskLists {
     display: flex;

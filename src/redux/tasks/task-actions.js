@@ -18,8 +18,13 @@ export const editTask = (id, task, completed) => ({
   payload: {id, task, completed}
 })
 
+export const setLoadingTrue = () => ({
+  type: 'SET_LOADING'
+})
+
 export const addTaskAsync = (id, task, completed) => {
   return dispatch => {
+    dispatch(setLoadingTrue())
     setTimeout(() => dispatch(addTask(id)) , 3000)
   }
 };

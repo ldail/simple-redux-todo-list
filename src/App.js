@@ -21,7 +21,9 @@ class App extends React.Component {
     this.setState({activeEditId: id, editValue: task});
   }
   render() {
-  const {tasks, changeCompleted, deleteTask, addTask, editTask} = this.props;
+  const {changeCompleted, deleteTask, addTask, editTask, loading} = this.props;
+  console.log(loading);
+  const {tasks} = this.props.tasks;
   return (
     <div className="App">
       <h1>Todo list</h1>
@@ -32,6 +34,7 @@ class App extends React.Component {
         <button type="button" onClick={() => addTask(document.querySelector('#addTaskInput').value)}>Add task</button>
 
         <p>*Note: Actions take three seconds to add (asynchronous)</p>
+        {loading && <p className="loading">Currently adding...</p>}
       </section>
 
       <section className="taskLists">
@@ -87,9 +90,11 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   const {tasks} = state;
-  return tasks;
+  const loading = state.tasks.loading;
+  console.log(tasks);
+  console.log(loading);
+  return {tasks, loading};
 }
 
 const mapDispatchToProps = dispatch => ({
