@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import {connect} from 'react-redux'
-import {changeCompleted, deleteTask, addTask, editTask} from './redux/tasks/task-actions'
+import {changeCompleted, deleteTask, addTaskAsync as addTask, editTask} from './redux/tasks/task-actions'
 
 class App extends React.Component {
   state = {
@@ -30,6 +30,8 @@ class App extends React.Component {
         <label htmlFor="addTaskInput">Add a task: </label>
         <input type="text" id="addTaskInput" name="addTaskInput" />
         <button type="button" onClick={() => addTask(document.querySelector('#addTaskInput').value)}>Add task</button>
+
+        <p>*Note: Actions take three seconds to add (asynchronous)</p>
       </section>
 
       <section className="taskLists">

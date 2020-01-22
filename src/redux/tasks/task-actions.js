@@ -17,3 +17,9 @@ export const editTask = (id, task, completed) => ({
   type: 'EDIT_TASK',
   payload: {id, task, completed}
 })
+
+export const addTaskAsync = (id, task, completed) => {
+  return dispatch => {
+    setTimeout(() => dispatch(addTask(id)) , 3000)
+  }
+};
